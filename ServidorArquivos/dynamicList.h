@@ -13,11 +13,10 @@
 
 #ifndef DYNAMICLIST_H
 #define	DYNAMICLIST_H
-#define ItemType int
 
-#ifdef	__cplusplus
-extern "C" {
-#endif
+#include "request.h"
+
+#define ItemType request
 
 
  /*

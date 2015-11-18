@@ -1,11 +1,14 @@
-/*
-@author Leonardo Pontes Baiser <lpbaiser@gmail.com>
-*/
-
+/* 
+ * File:   request.h
+ * Author: Leonardo Baiser <lpbaiser@gmail.com>
+ *
+ * Created on November 17, 2015, 1:40 PM
+ */
+#include "request.h"
 #include <stdio.h>
 #include <stdlib.h>
 
-#define ItemType int
+#define ItemType request
 
 typedef struct node {
     ItemType data;
@@ -57,8 +60,7 @@ Boolean addLastList(List *l, ItemType e) {
         l->first = n;
         l->last = n;
     } else {
-        printf("entrou");
-        l->last->next = n;
+            l->last->next = n;
         l->last = n;
     }
     l->size++;
