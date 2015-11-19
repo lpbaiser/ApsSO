@@ -14,4 +14,4 @@ typedef struct {
     int typeRequest;
     char path[2048];
     connection_t* connection;
-}request;
+}requestHandler;

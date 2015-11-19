@@ -14,7 +14,7 @@
 #ifndef DYNAMICLIST_H
 #define	DYNAMICLIST_H
 
-#include "request.h"
+#include "requestHandler.h"
 
 
 #define ItemType request

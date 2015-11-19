@@ -39,7 +39,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/connection.o \
 	${OBJECTDIR}/dynamicList.o \
 	${OBJECTDIR}/main.o \
-	${OBJECTDIR}/request.o \
+	${OBJECTDIR}/requestHandler.o \
 	${OBJECTDIR}/server.o
 
 
@@ -87,10 +87,10 @@ ${OBJECTDIR}/main.o: main.c
 	${RM} "$@.d"
 	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main.o main.c
 
-${OBJECTDIR}/request.o: request.c 
+${OBJECTDIR}/requestHandler.o: requestHandler.c 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/request.o request.c
+	$(COMPILE.c) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/requestHandler.o requestHandler.c
 
 ${OBJECTDIR}/server.o: server.c 
 	${MKDIR} -p ${OBJECTDIR}

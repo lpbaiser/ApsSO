@@ -15,7 +15,7 @@
       <itemPath>connection.c</itemPath>
       <itemPath>dynamicList.c</itemPath>
       <itemPath>main.c</itemPath>
-      <itemPath>request.c</itemPath>
+      <itemPath>requestHandler.c</itemPath>
       <itemPath>server.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
@@ -56,9 +56,9 @@
       </item>
       <item path="main.c" ex="false" tool="0" flavor2="0">
       </item>
-      <item path="request.c" ex="false" tool="0" flavor2="0">
-      </item>
       <item path="request.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="requestHandler.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="server.c" ex="false" tool="0" flavor2="0">
       </item>
@@ -95,9 +95,9 @@
       </item>
       <item path="main.c" ex="false" tool="0" flavor2="0">
       </item>
-      <item path="request.c" ex="false" tool="0" flavor2="0">
-      </item>
       <item path="request.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="requestHandler.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="server.c" ex="false" tool="0" flavor2="0">
       </item>

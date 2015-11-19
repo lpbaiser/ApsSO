@@ -4,6 +4,7 @@
 #include <unistd.h>
 #include <stdint.h>
 #include "connection.h"
+#include "dynamicList.h"
 #include <pthread.h>
 
 #define BUFFER_SIZE 1024
@@ -69,6 +70,12 @@ int main(int argc, char** argv){
 
     //Abrir socket para arguardar conexões
     listenSock = CONN_listenTo((char*)port);
+    
+    //criando a lista
+    List* lista;
+    lista=createList();
+    initializeList(lista);
+    
     
     while(1){
         //Aceitar conexões. Esta função retorna uma conexão (usando um novo socket) ou NULL.
