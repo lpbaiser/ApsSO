@@ -25,7 +25,7 @@ int main(int argc, char** argv){
     }
     
     //Host é o primeiro argumento e porta o segundo.
-    host = argv[1];
+    h   ost = argv[1];
     port = argv[2];
     
     //Conectar ao servidor
