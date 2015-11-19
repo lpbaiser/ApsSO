@@ -16,8 +16,20 @@
 
 #include "request.h"
 
+
 #define ItemType request
 
+
+typedef struct node {
+    ItemType data;
+    struct node *next;
+} Node;
+
+typedef struct {
+    Node *first;
+    Node *last;
+    int size;
+} List;
 
  /*
 	Retorna a estrutura de uma lista com o espaço alocado
