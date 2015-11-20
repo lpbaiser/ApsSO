@@ -9,6 +9,9 @@
         <group>
             <file>file:/data/BCC/workspace/ApsSO/ServidorArquivos/client.c</file>
             <file>file:/data/BCC/workspace/ApsSO/ServidorArquivos/connection.c</file>
+            <file>file:/data/BCC/workspace/ApsSO/ServidorArquivos/requestHandler.c</file>
+            <file>file:/data/BCC/workspace/ApsSO/ServidorArquivos/server.c</file>
+            <file>file:/data/BCC/workspace/ApsSO/ServidorArquivos/requestHandler.h</file>
         </group>
     </open-files>
 </project-private>

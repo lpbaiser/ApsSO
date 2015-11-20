@@ -6,7 +6,7 @@
                    projectFiles="true">
       <itemPath>connection.h</itemPath>
       <itemPath>dynamicList.h</itemPath>
-      <itemPath>request.h</itemPath>
+      <itemPath>requestHandler.h</itemPath>
     </logicalFolder>
     <logicalFolder name="SourceFiles"
                    displayName="Arquivos de Código-Fonte"
@@ -56,9 +56,9 @@
       </item>
       <item path="main.c" ex="false" tool="0" flavor2="0">
       </item>
-      <item path="request.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="requestHandler.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="requestHandler.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="server.c" ex="false" tool="0" flavor2="0">
       </item>
@@ -95,9 +95,9 @@
       </item>
       <item path="main.c" ex="false" tool="0" flavor2="0">
       </item>
-      <item path="request.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="requestHandler.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="requestHandler.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="server.c" ex="false" tool="0" flavor2="0">
       </item>
