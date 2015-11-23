@@ -8,16 +8,14 @@
 #ifndef WORKERTHREAD_H
 #define	WORKERTHREAD_H
 
-#ifdef	__cplusplus
-extern "C" {
-#endif
+typedef struct {
+    pthread_t *thread;
+    int isWorking;
+} workerT;
 
-
-
-
-#ifdef	__cplusplus
-}
-#endif
+typedef struct {
+    workerT *threads;
+} vetorThreads;
 
 #endif	/* WORKERTHREAD_H */
 

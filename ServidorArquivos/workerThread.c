@@ -12,32 +12,33 @@
 
 #define nThread int 4
 
-typedef struct {
-    pthread_t *thread;
-    int isWorking;
-} Thread;
 
-typedef struct {
-    Thread *threads;
-} vetorThreads;
 
-void createThreads(int numThreads) {
-
-    *vetorThreads = (vetorThreads) calloc(numThreads, sizeof (vetorThreads));
-
-    int i;
-    for (i = 0; i < numThreads; i++) {
-        Thread = (Thread) malloc(sizeof (Thread));
-        pthread_t* t;
-        t = malloc(sizeof (pthread_t));
-        Thread->thread = t;
-        Thread->isWorking = 0;
-        vetorThreads[i] = Thread;
-    }
-
-    printf(" %d", vetorThreads->threads[i]->isWorking);
-
+void processLs(char *path){
+    system(path);
 }
+
+void processWget(char *path){
+    
+}
+
+//void createThreads(int numThreads) {
+//
+//    *vetorThreads = (vetorThreads) calloc(numThreads, sizeof (vetorThreads));
+//
+//    int i;
+//    for (i = 0; i < numThreads; i++) {
+//        Thread = (Thread) malloc(sizeof (Thread));
+//        pthread_t* t;
+//        t = malloc(sizeof (pthread_t));
+//        Thread->thread = t;
+//        Thread->isWorking = 0;
+//        vetorThreads[i] = Thread;
+//    }
+//
+//    printf(" %d", vetorThreads->threads[i]->isWorking);
+//
+//}
 
 //void wakeThread(List* requestBuffer) {
 //    requestBuffer->first;
@@ -47,4 +48,6 @@ void createThreads(int numThreads) {
 //            if ()
 //            }
 //    }
+//
+
 //}
