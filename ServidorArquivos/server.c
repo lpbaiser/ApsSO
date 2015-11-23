@@ -72,12 +72,11 @@ int main(int argc, char** argv){
     listenSock = CONN_listenTo((char*)port);
     
     //criando a lista
-    List* lista;
-    lista=createList();
+    List *lista = createList();
     initializeList(lista);
     
     
-    while(1){
+    while(1){//dispatcher
         //Aceitar conexões. Esta função retorna uma conexão (usando um novo socket) ou NULL.
         //listenSocket ainda pode ser chamado para aceitar outras conexões!
         connection = CONN_accept(listenSock);

@@ -5,13 +5,12 @@
  * Created on November 17, 2015, 1:40 PM
  */
 
-#ifndef REQUEST_H
-#define	REQUEST_H
+#ifndef REQUESTHANDLER_H
+#define	REQUESTHANDLER_H
 
 #include "connection.h"
+#include "request.h"
+#include "dynamicList.h"
 
-typedef struct {
-    int typeRequest;
-    char path[2048];
-    connection_t* connection;
-}requestHandler;
+
+#endif
