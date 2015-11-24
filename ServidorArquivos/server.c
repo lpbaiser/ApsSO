@@ -7,7 +7,8 @@
 #include "dynamicList.h"
 #include <pthread.h>
 
-#define BUFFER_SIZE 1024
+    #define BUFFER_SIZE 2048
+List *lista;
 
 void* echoThread(void* args){
     
@@ -48,6 +49,26 @@ void* echoThread(void* args){
     
 }
 
+void *dispatcher(connection_t* connection, int listenSock,char* port ){
+     
+    while(1){//dispatcher
+        //Aceitar conexões. Esta função retorna uma conexão (usando um novo socket) ou NULL.
+        //listenSocket ainda pode ser chamado para aceitar outras conexões!
+        connection = CONN_accept(listenSock);
+
+        //Verificar se houve sucesso ao conectar
+        if(!connection){
+            fprintf(stderr, "Não foi possível conectar ao cliente remoto na porta %s!\n", port);
+            return(EXIT_FAILURE);
+        }
+
+        pthread_t* t;
+        t = malloc(sizeof(pthread_t));
+        
+        pthread_create(t, NULL, aguardaRequisicao, (void*) connection);
+    }
+}
+
 int main(int argc, char** argv){
 
     //Socket usado para aguardar a conexão
@@ -72,27 +93,10 @@ int main(int argc, char** argv){
     listenSock = CONN_listenTo((char*)port);
     
     //criando a lista
-    List *lista = createList();
+    lista = createList();
     initializeList(lista);
     
-    
-    while(1){//dispatcher
-        //Aceitar conexões. Esta função retorna uma conexão (usando um novo socket) ou NULL.
-        //listenSocket ainda pode ser chamado para aceitar outras conexões!
-        connection = CONN_accept(listenSock);
-
-        //Verificar se houve sucesso ao conectar
-        if(!connection){
-            fprintf(stderr, "Não foi possível conectar ao cliente remoto na porta %s!\n", port);
-            return(EXIT_FAILURE);
-        }
-
-        pthread_t* t;
-        t = malloc(sizeof(pthread_t));
-        
-        pthread_create(t, NULL, echoThread, (void*) connection);
-    }
-    
+    dispatcher(connection,listenSock,port);
     //fechar o socket
     close(listenSock);
     

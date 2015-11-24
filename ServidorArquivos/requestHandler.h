@@ -12,5 +12,10 @@
 #include "request.h"
 #include "dynamicList.h"
 
+/* Aguarda que o usuário digite alguma coisa,
+ * depois manda o buffer para o resquest que verifica
+ * a requisição digitada
+ */
+void* aguardaRequisicao(connection_t connection);
 
 #endif
