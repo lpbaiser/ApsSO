@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include "requestHandler.h"
 #include "request.h"
+#include <semaphore.h>
 
 #define BUFFER_SIZE 2048
 
@@ -16,7 +17,14 @@ void* aguardaRequisicao(connection_t connection) {
         }
         request *req = (request*) calloc(1, sizeof (request));
         req = createRequest(connection, buffer);
-        addLastList(lista, req);
+        addList(req);
     }
 
+}
+
+void* addList(request req) {
+    sem_wait(&mutexAddLista);
+    addLastList(lista, req);
+    sem_post(&mutexAddLista);
+    sem_post(&mutexVazio);
 }

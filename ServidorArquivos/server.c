@@ -6,9 +6,13 @@
 #include "connection.h"
 #include "dynamicList.h"
 #include <pthread.h>
+#include <semaphore.h>
 
     #define BUFFER_SIZE 2048
 List *lista;
+sem_t mutexAddLista;
+sem_t mutexVazio;
+pthread_t *threads;
 
 void* echoThread(void* args){
     
@@ -70,6 +74,8 @@ void *dispatcher(connection_t* connection, int listenSock,char* port ){
 }
 
 int main(int argc, char** argv){
+    //init
+    //sem_i
 
     //Socket usado para aguardar a conexão
     int listenSock;
@@ -79,7 +85,7 @@ int main(int argc, char** argv){
     
     //Porta a ser usada pelo servidor... (use portas altas (10000+) para evitar conflitos com serviços já sendo executados)
     char* port;
-    
+    int nThreads;
     //Verficar se a porta foi passada como argumento
     if(argc < 2){
         fprintf(stderr, "uso: %s porta\n", argv[0]);
@@ -88,6 +94,14 @@ int main(int argc, char** argv){
 
     //porta é o primeiro argumento
     port = argv[1];    
+    nThreads=argv[2];
+    int i;
+    for (i = 0; i < nThreads; i++) {
+        
+        pthread_create(&threads[i], NULL, wakeThread,NULL);
+        //VERRIFICAR
+        sem_wait(mutexVazio);
+    }
 
     //Abrir socket para arguardar conexões
     listenSock = CONN_listenTo((char*)port);
