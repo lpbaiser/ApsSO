@@ -4,6 +4,7 @@
 #include "requestHandler.h"
 #include "request.h"
 #include <semaphore.h>
+#include <pthread.h>
 
 #define BUFFER_SIZE 2048
 
@@ -23,8 +24,8 @@ void* aguardaRequisicao(connection_t connection) {
 }
 
 void* addList(request req) {
-    sem_wait(&mutexAddLista);
+    pthread_mutex_lock(&mutexAddLista);
     addLastList(lista, req);
-    sem_post(&mutexAddLista);
-    sem_post(&mutexVazio);
+    pthread_mutex_unlock(&mutexAddLista);
+    sem_post(&full);
 }
