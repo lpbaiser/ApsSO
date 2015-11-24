@@ -75,7 +75,7 @@ void *dispatcher(connection_t* connection, int listenSock,char* port ){
 
 int main(int argc, char** argv){
     //init
-    sem_init(&mutexAddLista,0,1);
+    pthread_mutex_init(&mutexAddLista,0,1);
     sem_init(&full,0,0);
     //Socket usado para aguardar a conexão
     int listenSock;
