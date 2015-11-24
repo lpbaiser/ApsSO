@@ -65,7 +65,7 @@ Boolean removeFirstList(List* l, ItemType *e) {
     if (isEmptyList(l)) {
         return false;
     }
-    Node *remove = l->first;
+    Node *e = l->first;
     l->first = NULL;
     l->last = NULL;
     return true;

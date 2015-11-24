@@ -8,14 +8,9 @@
 #ifndef WORKERTHREAD_H
 #define	WORKERTHREAD_H
 
-typedef struct {
-    pthread_t *thread;
-    int isWorking;
-} workerT;
 
-typedef struct {
-    workerT *threads;
-} vetorThreads;
+
+void wakeThread();
 
 #endif	/* WORKERTHREAD_H */
 
