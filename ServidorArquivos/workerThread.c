@@ -19,7 +19,7 @@
 
 #define BUFFER_SIZE 2048
 
-void processLs(request *r) {
+void processLs(Request *r) {
     int p[2], backup;
     char buffer[2048];
     char buf[2048];
@@ -41,7 +41,7 @@ void processLs(request *r) {
     CONN_send(r->connection, buffer, BUFFER_SIZE, 0);
 }
 
-void processWget(request *r) {
+void processWget(Request *r) {
 
     FILE *f;
     char c;
@@ -85,7 +85,7 @@ void wakeThread() {
     if (lista->size > 0) {
         request *r = (request) malloc(sizeof (request));
         if (lista->first->data->typeRequest == 1) {
-            removeFirstList(lista, r);
+            removeFirstList(lista, &r);
             processLs(r);
         } else if (lista->first->data->typeRequest == 2) {
             removeFirstList(lista, r);

@@ -5,16 +5,17 @@
  * Created on November 21, 2015, 5:57 PM
  */
 
-#include "request.h"
 #include "connection.h"
+#include "request.h"
+#include <string.h>
 
 #define BUFFER_SIZE 2048
 
-request* createRequest(connection_t connection, char* buffer) {
+Request* createRequest(connection_t connection, char* buffer) {
 
-    request request = (request) malloc(sizeof (request));
+    Request *request = (Request*) malloc(sizeof(Request));
     char* req;
-    request->connection = connection;
+    request->connection = &connection;
 
     int tamBuffer = strlen(buffer);
     int i = 0;

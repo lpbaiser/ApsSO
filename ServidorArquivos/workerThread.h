@@ -8,7 +8,9 @@
 #ifndef WORKERTHREAD_H
 #define	WORKERTHREAD_H
 
+void processLs(Request *r);
 
+void processWget(Request *r);
 
 void wakeThread();
 

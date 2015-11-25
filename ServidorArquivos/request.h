@@ -8,16 +8,16 @@
 #ifndef REQUEST_H
 #define	REQUEST_H
 
-typedef struct {
+typedef struct request{
     int typeRequest;
     char path[2048];
     struct connection_t* connection;
-}request;
+}Request;
 
 /*Cria uma request de acordo com a entrada do usuario(ls ou wget)
  * e retorna para o request handler 
  */
-request* createRequest(connection_t connection, char* buffer);
+Request* createRequest(connection_t connection, char* buffer);
 
 #endif	/* REQUEST_H */
 

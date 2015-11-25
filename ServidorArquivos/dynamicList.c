@@ -13,28 +13,6 @@
 
 #include "dynamicList.h"
 
-//#define ItemType requestHandler
-//#define ItemType requestHandler
-
-
-
-
-//
-//List *createList();
-//void initializeList(List *l);
-//Boolean addLastList(List *l, ItemType e);
-//Boolean addList(List* l, ItemType e, int index);
-//Boolean removeList(List* l, int index, ItemType *e);
-//Boolean removeFirstList(List* l, ItemType* e);
-//Boolean removeLastList(List* l, ItemType* e);
-//Boolean getList(List* l, int index, ItemType* e);
-//Boolean setList(List* l, int index, ItemType e);
-//int indexOfList(List* l, ItemType* e);
-//Boolean containsList(List* l, ItemType *e);
-//Boolean isEmptyList(List* l);
-//void printList(List* l);
-//void printBoolean(Boolean *b);
-
 List *createList() {
     return (List*) malloc(sizeof (List));
 }
@@ -45,7 +23,7 @@ void initializeList(List *l) {
     l->last = NULL;
 }
 
-Boolean addLastList(List *l, ItemType e) {
+Boolean addLastList(List *l, Request e) {
     Node *n = (Node*) malloc(sizeof (Node));
     n->data = e;
     n->next = NULL;
@@ -57,15 +35,16 @@ Boolean addLastList(List *l, ItemType e) {
         l->last = n;
     }
     l->size++;
-    return true;
+    return 1;
 }
 
 
-Boolean removeFirstList(List* l, ItemType *e) {
+Boolean removeFirstList(List* l, Request e) {
     if (isEmptyList(l)) {
         return false;
     }
-    Node *e = l->first;
+    Node *remove = l->first;
+    e = l->first->data;
     l->first = NULL;
     l->last = NULL;
     return true;

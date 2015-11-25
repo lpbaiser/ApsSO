@@ -17,10 +17,10 @@
 #include "requestHandler.h"
 #include "request.h"
 
-typedef request ItemType;
+//typedef Request ItemType;
 
 typedef struct node {
-    ItemType data;
+    Request data;
     struct node *next;
 } Node;
 
@@ -48,13 +48,13 @@ void initializeList(List *l);
         Retorna true quando um ItemType foi adicionado na ultima posição da lista
         ou retorna false se não foi possivél adicionar.
  */
-Boolean addLastList(List *l, ItemType e);
+Boolean addLastList(List *l, Request e);
 
 /*
         Retorna true quando um ItemType foi removido da primeira posição 
         ou retorna false se não foi possivél remover.
  */
-Boolean removeFirstList(List* l, ItemType* e);
+Boolean removeFirstList(List* l, Request e);
 
 /*
         Retorna true se a lista estiver vazia ou false se conter elemento(s).
