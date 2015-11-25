@@ -12,7 +12,7 @@ void processLs(Request *r);
 
 void processWget(Request *r);
 
-void wakeThread();
+void* wakeThread();
 
 #endif	/* WORKERTHREAD_H */
 

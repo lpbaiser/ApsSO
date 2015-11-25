@@ -82,7 +82,7 @@ void processWget(Request *r) {
  * retira da lista
  * destrava lista
  */
-void wakeThread() {
+void* wakeThread() {
 
     sem_wait(&full);
     pthread_mutex_lock(&mutexAddLista);
