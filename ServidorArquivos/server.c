@@ -70,7 +70,7 @@ void *dispatcher(connection_t* connection, int listenSock, char* port) {
         pthread_t* t;
         t = malloc(sizeof (pthread_t));
 
-            pthread_create(t, NULL, aguardaRequisicao, (void*) connection);
+            pthread_create(t, NULL,(void*)aguardaRequisicao, (void*) connection);
     }
 }
 
