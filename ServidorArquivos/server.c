@@ -8,6 +8,7 @@
 #include <pthread.h>
 #include <semaphore.h>
 #include "workerThread.h"
+#include "requestHandler.h"
 
 #define BUFFER_SIZE 2048
 List *lista;

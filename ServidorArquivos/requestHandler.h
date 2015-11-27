@@ -17,5 +17,6 @@
  * a requisição digitada
  */
 void* aguardaRequisicao(connection_t connection);
+void* addList(Request req);
 
 #endif

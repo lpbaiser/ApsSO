@@ -23,7 +23,7 @@ void* aguardaRequisicao(connection_t connection) {
 
 }
 
-void* addList(request req) {
+void* addList(Request req) {
     pthread_mutex_lock(&mutexAddLista);
     addLastList(lista, req);
     pthread_mutex_unlock(&mutexAddLista);
