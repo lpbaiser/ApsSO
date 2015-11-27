@@ -72,13 +72,19 @@ int main(int argc, char** argv) {
             f = fopen(nomeArquivo, "w");
 
             do {
-                
+
                 CONN_receive(connection, buffer, BUFFER_SIZE, 0);
-                fputc(buffer, f);
+                int i;
+                for (i = 0; i < strlen(buffer) - 1; i++) {
+                    fputc(buffer[i], f);
+
+                }
+
+
 
             } while (strcmp(buffer, "EOF"));
-            
-            fclose(f);  
+
+            fclose(f);
             //guardar arquivo no diretório
         }
 
