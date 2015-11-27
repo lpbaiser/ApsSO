@@ -70,13 +70,13 @@ void *dispatcher(connection_t* connection, int listenSock, char* port) {
         pthread_t* t;
         t = malloc(sizeof (pthread_t));
 
-        pthread_create(t, NULL, aguardaRequisicao, (void*) connection);
+            pthread_create(t, NULL, aguardaRequisicao, (void*) connection);
     }
 }
 
 int main(int argc, char** argv) {
     //init
-    pthread_mutex_init(&mutexAddLista, 0, 1);
+    pthread_mutex_init(&mutexAddLista,NULL);
     sem_init(&full, 0, 0);
     //Socket usado para aguardar a conexão
     int listenSock;
@@ -95,7 +95,7 @@ int main(int argc, char** argv) {
 
     //porta é o primeiro argumento
     port = argv[1];
-    nThreads = (int) argv[2];
+    nThreads = atoi(argv[2]);
     
     int i;
     for (i = 0; i < nThreads; i++) {
