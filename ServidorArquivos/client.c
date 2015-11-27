@@ -17,7 +17,7 @@ int main(int argc, char** argv) {
     char* port;
 
     //Buffer usado para receber e enviar dados
-    uint8_t buffer[BUFFER_SIZE];
+    char buffer[BUFFER_SIZE];
     char typeRequest[4];
 
     //Verificar se a porta e o host foi passado como argumento
