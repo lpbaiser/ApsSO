@@ -80,8 +80,6 @@ int main(int argc, char** argv) {
 
                 }
 
-
-
             } while (strcmp(buffer, "EOF"));
 
             fclose(f);

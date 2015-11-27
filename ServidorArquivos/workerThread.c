@@ -15,6 +15,7 @@
 #include "workerThread.h"
 #include "dynamicList.h"
 #include "server.h"
+#include "request.h"
 
 
 #define BUFFER_SIZE 2048
@@ -55,7 +56,7 @@ void processWget(Request *r) {
         //        return -1;
     } else {
 
-        CONN_send(r->connection, buffer, BUFFER_SIZE, 0);
+        CONN_send(r->connection, getNameArquivo(r), BUFFER_SIZE, 0);
 
         c = fgetc(f);
         while (c != EOF) {
@@ -104,19 +105,17 @@ void* wakeThread() {
 
 char* getNameArquivo(Request *r) {
     char nome[BUFFER_SIZE];
-    while (strlen(r->path)) {
-
+    nome = r->path;
+    int i;
+    for (i = strlen(r->path) - 1; i > 0; i--) {
+        if (nome[i] != '/') {
+            break;
+        }
     }
+    for (; i < strlen(r->path); i++) {
+        nome[i] = r->path[i];
+    }
+    return nome;
 }
 
-char* inverteString(char *string) {
-    int a,b;
-    char auxiliar[strlen(string)];
-    b = strlen(string) - 1; //strlen calcula a quantidade de caracteres que tem a string
-    for (a = 0; string[a] != '\0'; a++) { //Repete enquanto nao chegar ao final da string
-        auxiliar[b] = string[a];
-        b--;
-    }
-    auxiliar[a] = '\0'; //Se nao colocar essa parte, o programa pode mostrar LIXO
-    strcpy(string, auxiliar); //Copia para a variável string o conteúdo da variável auxiliar
-}
+
