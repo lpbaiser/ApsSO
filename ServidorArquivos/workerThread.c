@@ -20,6 +20,33 @@
 
 #define BUFFER_SIZE 2048
 
+/*
+ * ver se tem item na lista
+ * wait no semaforo
+ * travar a lista
+ * retira da lista
+ * destrava lista
+ */
+void* wakeThread() {
+
+    sem_wait(&full);
+    pthread_mutex_lock(&mutexAddLista);
+    Request *r = (Request*) calloc(1, sizeof (Request));
+
+    if (requestBuffer->size > 0) {
+        if (requestBuffer->first->data->typeRequest == 1) {//==1
+            removeFirstList(requestBuffer, r);
+            processLs(r);
+        } else if (requestBuffer->first->data->typeRequest == 2) {//->typeRequest==2
+            removeFirstList(requestBuffer, r);
+            processWget(requestBuffer->first->data);
+        }
+    }
+
+    pthread_mutex_unlock(&mutexAddLista);
+
+}
+
 void processLs(Request *r) {
     int p[2], backup;
     char buffer[BUFFER_SIZE];
@@ -30,7 +57,7 @@ void processLs(Request *r) {
     close(1);
 
     pipe(p);
-    char path = "ls";
+    char* path = "ls";
     strcat(path, r->path);
     system(path);
     dup2(backup, 1);
@@ -56,11 +83,13 @@ void processWget(Request *r) {
         //        return -1;
     } else {
 
+        memset(buffer, (char) 0, sizeof (char)*BUFFER_SIZE);
         CONN_send(r->connection, getNameArquivo(r), BUFFER_SIZE, 0);
+        memset(buffer, (char) 0, sizeof (char)*BUFFER_SIZE);
 
         c = fgetc(f);
         while (c != EOF) {
-            strcat(buffer, c);
+            strcat(buffer, &c);
             if (strlen(buffer) == 2048) {
                 CONN_send(r->connection, buffer, BUFFER_SIZE, 0);
                 memset(buffer, (char) 0, sizeof (char)*BUFFER_SIZE);
@@ -71,40 +100,16 @@ void processWget(Request *r) {
         }
 
         memset(buffer, (char) 0, sizeof (char)*BUFFER_SIZE);
-        buffer = "EOF";
+
+        strcpy(buffer, "EOF");
+        //        buffer = "EOF";
+
         CONN_send(r->connection, buffer, BUFFER_SIZE, 0);
     }
 }
 
-/*
- * ver se tem item na lista
- * wait no semaforo
- * travar a lista
- * retira da lista
- * destrava lista
- */
-void* wakeThread() {
-
-    sem_wait(&full);
-    pthread_mutex_lock(&mutexAddLista);
-
-    if (lista->size > 0) {
-        request *r = (request) malloc(sizeof (request));
-        if (lista->first->data->typeRequest == 1) {
-            removeFirstList(lista, &r);
-            processLs(r);
-        } else if (lista->first->data->typeRequest == 2) {
-            removeFirstList(lista, r);
-            processWget(lista->first->data);
-        }
-    }
-
-    pthread_mutex_unlock(&mutexAddLista);
-
-}
-
-char* getNameArquivo(Request *r) {
-    char nome[BUFFER_SIZE];
+char* getNameArquivo(Request* r) {
+    char *nome;
     nome = r->path;
     int i;
     for (i = strlen(r->path) - 1; i > 0; i--) {

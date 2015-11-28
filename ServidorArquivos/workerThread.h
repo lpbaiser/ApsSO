@@ -14,5 +14,7 @@ void processWget(Request *r);
 
 void* wakeThread();
 
+char* getNameArquivo(Request* r);
+
 #endif	/* WORKERTHREAD_H */
 

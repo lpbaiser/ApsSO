@@ -151,7 +151,7 @@ int CONN_listenTo(char* port){
         exit(EXIT_FAILURE);
     }
     else{
-        fprintf(stderr, "socket bound to %zd...\n", rp->ai_addr);
+        fprintf(stderr, "socket bound to %p...\n", rp->ai_addr);
     }    
     
     fcntl(sock, F_SETFD, O_NONBLOCK);

@@ -44,7 +44,7 @@ int main(int argc, char** argv) {
     printf("%s\n", buffer);
 
     while (1) {
-        printf("Digite uma mensagem para o servidor: ");
+        printf("Digite uma requisição: \n>>> ");
 
         //ler a mensagem a ser enviada ao servidor
         fgets(buffer, BUFFER_SIZE, stdin);

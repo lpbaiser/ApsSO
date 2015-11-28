@@ -10,8 +10,10 @@
 #include <string.h>
 #include "connection.h"
 #include "requestHandler.h"
-
 #include "dynamicList.h"
+#include "server.h"
+#include "workerThread.h"
+#include "request.h"
 
 List *createList() {
     return (List*) malloc(sizeof (List));
@@ -23,9 +25,10 @@ void initializeList(List *l) {
     l->last = NULL;
 }
 
-Boolean addLastList(List *l, Request e) {
+Boolean addLastList(List *l, Request* e) {
     Node *n = (Node*) malloc(sizeof (Node));
-    n->data = e;
+    n->data = (Request*) malloc(sizeof(Request));
+    memcpy(n->data, e, sizeof(Request));
     n->next = NULL;
     if (l->size == 0) {
         l->first = n;
@@ -38,12 +41,11 @@ Boolean addLastList(List *l, Request e) {
     return 1;
 }
 
-
-Boolean removeFirstList(List* l, Request e) {
+Boolean removeFirstList(List* l, Request *e) {
     if (isEmptyList(l)) {
         return false;
     }
-    Node *remove = l->first;
+//    Node *remove = l->first;
     e = l->first->data;
     l->first = NULL;
     l->last = NULL;
