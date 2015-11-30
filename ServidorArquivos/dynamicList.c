@@ -41,14 +41,40 @@ Boolean addLastList(List *l, Request* e) {
     return 1;
 }
 
+//Boolean removeList(List* l, int index, Request *e) {
+//    
+//    Node *aux = l->first;
+//    Node *remove = (Node*) malloc(sizeof (Node));
+//    if (index == 0) {
+//        removeFirstList(l, e);
+//    } 
+//    *e = remove->data;
+//    free(remove);
+//    l->size--;
+//    return true;
+//}
+//
+//Boolean removeFirstList(List* l, Request *e) {
+//    if (isEmptyList(l)) {
+//        return false;
+//    }
+//    Node *remove = l->first;
+//    l->first = NULL;
+//    l->last = NULL;
+//    return true;
+//}
+
 Boolean removeFirstList(List* l, Request *e) {
     if (isEmptyList(l)) {
         return false;
     }
-//    Node *remove = l->first;
     e = l->first->data;
-    l->first = NULL;
-    l->last = NULL;
+    Node *node = (Node*) malloc(sizeof(Node));
+    node = l->first;
+    l->first = l->first->next;
+    
+    free(node);
+    l->size--;
     return true;
 }
 

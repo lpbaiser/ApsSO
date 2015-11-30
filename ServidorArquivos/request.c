@@ -27,15 +27,17 @@ Request* createRequest(connection_t *connection, char* buffer) {
     }
     i++;
     int j = 0;
+    request->path = (char*) malloc(sizeof(char));
     while (i < tamBuffer) {
+//        strcpy(request->path[j],buffer[i]);
         request->path[j] = buffer[i];
         i++;
         j++;
     }
 
-    if (strcmp(req, "ls")) {
+    if (!strcmp(req, "ls")) {
         request->typeRequest = 1;
-    } else if (strcmp(req, "wget")) {
+    } else if (!strcmp(req, "wget")) {
         request->typeRequest = 2;
     }
 

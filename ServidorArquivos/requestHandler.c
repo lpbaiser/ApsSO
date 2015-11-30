@@ -16,21 +16,22 @@ void* aguardaRequisicao(void* args) {
     
     
     char buffer[BUFFER_SIZE];
+    memset(buffer, 0, BUFFER_SIZE);
     while (1) {
         CONN_receive(connection, buffer, BUFFER_SIZE, 0);
+        
 
         if (!strcmp(buffer, "sair")) {
             break;
         }
         Request *request = (Request*) calloc(1, sizeof (Request));
         request = createRequest(connection, buffer);
-        addList(request);
+        addRequestList(request);
     }
     CONN_close(connection);
 
 }
-
-void* addList(Request* request) {
+void* addRequestList(Request* request) {
     pthread_mutex_lock(&mutexAddLista);
     addLastList(requestBuffer, request);
     pthread_mutex_unlock(&mutexAddLista);

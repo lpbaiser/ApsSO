@@ -18,6 +18,6 @@
  * a requisição digitada
  */
 void* aguardaRequisicao(void* args);
-void* addList(Request *req);
+void* addRequestList(Request *req);
 
 #endif

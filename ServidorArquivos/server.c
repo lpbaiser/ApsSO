@@ -32,35 +32,26 @@ int dispatcher(int* listenSock, char* port) {
         return EXIT_FAILURE;
     }
     
+    char* buffer = "Conectado com sucesso!";    
+    CONN_send(connection, buffer, strlen(buffer), 0);
+    
     Request *stRequest = (Request*) malloc(sizeof(Request));
     stRequest->connection = connection;
-    stRequest->path = "ls files/";
+    stRequest->path = "files/";
     stRequest->typeRequest = 1;
-    addList(stRequest);
+    addRequestList(stRequest);
     
-    char* buffer = "Conexão com sucesso!";    
-    CONN_send(connection, buffer, strlen(buffer), 0);
     
     pthread_t* t;
     t = malloc(sizeof (pthread_t));
-    printf("a");
     pthread_create(t, NULL, aguardaRequisicao, (void*) connection);
 
     return EXIT_SUCCESS;
 }
 
 int main(int argc, char** argv) {
-
     requestBuffer = createList();
     initializeList(requestBuffer);  
-    
-//    Request *stRequest = (Request*) malloc(sizeof(Request));
-////    stRequest->connection = connection;
-//    stRequest->path = "ls files/";
-//    stRequest->typeRequest = 1;
-////    addList(stRequest);
-//    addLastList(requestBuffer, stRequest);
-//    printf("%d", requestBuffer->first->data->typeRequest);
     
     sem_init(&full, 0, 0);
     pthread_mutex_init(&mutexAddLista, NULL);
@@ -70,7 +61,7 @@ int main(int argc, char** argv) {
 
     //Porta a ser usada pelo servidor... (use portas altas (10000+) para evitar conflitos com serviços já sendo executados)
     char* port;
-    int nThreads = 1;
+    int nThreads = 3;
 
     //Verficar se a porta foi passada como argumento
     if (argc < 2) {

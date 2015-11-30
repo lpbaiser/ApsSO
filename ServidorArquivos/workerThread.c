@@ -34,10 +34,11 @@ void* wakeThread() {
     Request *r = (Request*) calloc(1, sizeof (Request));
 
     if (requestBuffer->size > 0) {
-        if (requestBuffer->first->data->typeRequest == 1) {//==1
+        if (requestBuffer->first->data->typeRequest == 1) {
+            r = requestBuffer->first->data;
             removeFirstList(requestBuffer, r);
             processLs(r);
-        } else if (requestBuffer->first->data->typeRequest == 2) {//->typeRequest==2
+        } else if (requestBuffer->first->data->typeRequest == 2) {
             removeFirstList(requestBuffer, r);
             processWget(requestBuffer->first->data);
         }
@@ -57,18 +58,27 @@ void processLs(Request *r) {
     close(1);
 
     pipe(p);
-    char* path = "ls";
+    char* path = malloc(sizeof (char));
+    strcpy(path, "ls ");
     strcat(path, r->path);
     system(path);
     dup2(backup, 1);
 
-    while (fgets(buf, 1000, stdin)) {
-        strcat(buffer, buf);
-    }
-    char typeRequest[2] = "ls";
-    CONN_send(r->connection, typeRequest, 2, 0);
+    if (buf == NULL) {
+        char *typeRequest = "erro";
+        strcpy(buffer, "Diretório/Arquivo não encontrado");
+        CONN_send(r->connection, typeRequest, strlen(typeRequest), 0);
+        CONN_send(r->connection, buffer, strlen(typeRequest), 0);
+    } else {
 
-    CONN_send(r->connection, buffer, BUFFER_SIZE, 0);
+        while (fgets(buf, 1000, stdin)) {
+            strcat(buffer, buf);
+        }
+        char typeRequest[2] = "ls";
+        CONN_send(r->connection, typeRequest, 2, 0);
+
+        CONN_send(r->connection, buffer, BUFFER_SIZE, 0);
+    }
 }
 
 void processWget(Request *r) {
