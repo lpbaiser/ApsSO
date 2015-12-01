@@ -13,7 +13,7 @@ void aguardaRequisicao(connection_t* connection){
 
 
     char buffer[BUFFER_SIZE];
-//    memset(buffer, 0, BUFFER_SIZE);
+    memset(buffer, 0, BUFFER_SIZE);
     
     CONN_receive(connection, buffer, BUFFER_SIZE, 0);
 

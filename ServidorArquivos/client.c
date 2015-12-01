@@ -18,8 +18,8 @@ int main(int argc, char** argv) {
 
     //Buffer usado para receber e enviar dados
     char buffer[BUFFER_SIZE];
-    char typeRequest[2];
-    memset(typeRequest, '\0', sizeof(char)*2);
+    char typeRequest[BUFFER_SIZE];
+//    memset(typeRequest, '\0', sizeof(char)*2);
 
     //Verificar se a porta e o host foi passado como argumento
     if (argc < 3) {
@@ -49,7 +49,7 @@ int main(int argc, char** argv) {
     //    printf("%s\n", buffer);
 
     while (1) {
-        memset(buffer, 0, BUFFER_SIZE);
+//        memset(buffer, 0, BUFFER_SIZE);
 
         printf("Digite uma requisição: \n>>> ");
 
@@ -66,15 +66,15 @@ int main(int argc, char** argv) {
         CONN_send(connection, buffer, strlen(buffer) + 1, 0);
 
         //aguardar o echo
-        CONN_receive(connection, typeRequest, 2, 0);
-        if (!strcmp(typeRequest, "ls")) {
-            memset(buffer, 0, BUFFER_SIZE);
+        CONN_receive(connection, typeRequest, BUFFER_SIZE, 0);
+//        printf("type: %d", type);
+        if (!strcmp(typeRequest, "ls")) {//!strcmp(typeRequest, "ls")
+//            memset(buffer, 0, BUFFER_SIZE);
             CONN_receive(connection, buffer, BUFFER_SIZE, 0);
-            printf("Chegou request");
             printf("%s\n", buffer);
 
-        } else if (!strcmp(typeRequest, "wg")) {
-            memset(buffer, 0, BUFFER_SIZE);
+        } else if (!strcmp(typeRequest, "wg")) {//!strcmp(typeRequest, "wg")
+//            memset(buffer, 0, BUFFER_SIZE);
             char nomeArquivo[BUFFER_SIZE];
             CONN_receive(connection, nomeArquivo, BUFFER_SIZE, 0);
 
@@ -94,7 +94,7 @@ int main(int argc, char** argv) {
             fclose(f);
             //guardar arquivo no diretório
         }
-        memset(typeRequest, '\0', sizeof(char)*2);
+//        memset(typeRequest, '\0', sizeof(char)*2);
         //        else if (strcmp(typeRequest, "erro")) {
         //            CONN_receive(connection, buffer, BUFFER_SIZE, 0);
         //            printf("%s\n", buffer);

@@ -75,9 +75,11 @@ void processLs(Request *r) {
     //        CONN_send(r->connection, buffer, strlen(typeRequest), 0);
     //    } else {
 
-    char typeRequest[2] = "ls";
-    CONN_send(r->connection, typeRequest, 2, 0);
-    memset(typeRequest, '\0', sizeof(char)*2);
+    char typeRequest[BUFFER_SIZE] = "ls\0";
+//    int type = 1;
+    //    memset(typeRequest, '\0', sizeof(char)*2);
+    //    strcpy(typeRequest, "ls");  
+    CONN_send(r->connection, typeRequest, BUFFER_SIZE, 0);
 
     CONN_send(r->connection, buffer, BUFFER_SIZE, 0);
 
@@ -95,9 +97,14 @@ void processWget(Request *r) {
         //        return -1;
     } else {
 
-        char typeRequest[2] = "wg";
-        CONN_send(r->connection, typeRequest, 2, 0);
-        memset(typeRequest, '\0', sizeof(char)*2);
+        //        char typeRequest[2] = "wg";
+        //        CONN_send(r->connection, typeRequest, 2, 0);
+        //        memset(typeRequest, '\0', sizeof(char)*2);
+
+        int type = 2;
+        //    memset(typeRequest, '\0', sizeof(char)*2);
+        //    strcpy(typeRequest, "ls");  
+        CONN_send(r->connection, type, sizeof (int), 0);
 
         memset(buffer, '\0', sizeof (char)*BUFFER_SIZE);
         CONN_send(r->connection, getNameArquivo(r), BUFFER_SIZE, 0);
