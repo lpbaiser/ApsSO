@@ -43,9 +43,9 @@ int main(int argc, char** argv) {
     CONN_receive(connection, buffer, 1024, 0);
     printf("%s\n", buffer);
 
-    CONN_receive(connection, typeRequest, 2, 0);
-    CONN_receive(connection, buffer, BUFFER_SIZE, 0);
-    printf("%s\n", buffer);
+//    CONN_receive(connection, typeRequest, 2, 0);
+//    CONN_receive(connection, buffer, BUFFER_SIZE, 0);
+//    printf("%s\n", buffer);
 
     while (1) {
         printf("Digite uma requisição: \n>>> ");
@@ -81,17 +81,17 @@ int main(int argc, char** argv) {
                 int i;
                 for (i = 0; i < strlen(buffer) - 1; i++) {
                     fputc(buffer[i], f);
-
                 }
 
             } while (strcmp(buffer, "EOF"));
 
             fclose(f);
             //guardar arquivo no diretório
-        } else if (strcmp(typeRequest, "erro")) {
-            CONN_receive(connection, buffer, BUFFER_SIZE, 0);
-            printf("%s\n", buffer);
-        }
+        } 
+//        else if (strcmp(typeRequest, "erro")) {
+//            CONN_receive(connection, buffer, BUFFER_SIZE, 0);
+//            printf("%s\n", buffer);
+//        }
 
         //verificar se enviou um "sair". Caso afirmativo, terminar o cliente.
         if (!strcmp(buffer, "sair")) {

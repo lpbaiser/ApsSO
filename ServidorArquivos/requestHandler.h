@@ -17,7 +17,8 @@
  * depois manda o buffer para o resquest que verifica
  * a requisição digitada
  */
-void* aguardaRequisicao(void* args);
+void aguardaRequisicao(connection_t* connection);
+void* requestHandler(void* args);
 void* addRequestList(Request *req);
 
 #endif

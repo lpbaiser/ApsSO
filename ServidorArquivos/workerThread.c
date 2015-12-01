@@ -64,21 +64,22 @@ void processLs(Request *r) {
     system(path);
     dup2(backup, 1);
 
-    if (buf == NULL) {
-        char *typeRequest = "erro";
-        strcpy(buffer, "Diretório/Arquivo não encontrado");
-        CONN_send(r->connection, typeRequest, strlen(typeRequest), 0);
-        CONN_send(r->connection, buffer, strlen(typeRequest), 0);
-    } else {
+    while (fgets(buf, 1000, stdin)) {
+        strcat(buffer, buf);
+    }
 
-        while (fgets(buf, 1000, stdin)) {
-            strcat(buffer, buf);
-        }
+//    if (buf == NULL) {
+//        char *typeRequest = "erro";
+//        strcpy(buffer, "Diretório/Arquivo não encontrado");
+//        CONN_send(r->connection, typeRequest, strlen(typeRequest), 0);
+//        CONN_send(r->connection, buffer, strlen(typeRequest), 0);
+//    } else {
+
         char typeRequest[2] = "ls";
         CONN_send(r->connection, typeRequest, 2, 0);
 
         CONN_send(r->connection, buffer, BUFFER_SIZE, 0);
-    }
+    
 }
 
 void processWget(Request *r) {

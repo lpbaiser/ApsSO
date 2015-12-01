@@ -35,16 +35,16 @@ int dispatcher(int* listenSock, char* port) {
     char* buffer = "Conectado com sucesso!";    
     CONN_send(connection, buffer, strlen(buffer), 0);
     
-    Request *stRequest = (Request*) malloc(sizeof(Request));
-    stRequest->connection = connection;
-    stRequest->path = "files/";
-    stRequest->typeRequest = 1;
-    addRequestList(stRequest);
+//    Request *stRequest = (Request*) malloc(sizeof(Request));
+//    stRequest->connection = connection;
+//    stRequest->path = "files/";
+//    stRequest->typeRequest = 1;
+//    addRequestList(stRequest);
     
     
     pthread_t* t;
     t = malloc(sizeof (pthread_t));
-    pthread_create(t, NULL, aguardaRequisicao, (void*) connection);
+    pthread_create(t, NULL, requestHandler, (void*) connection);
 
     return EXIT_SUCCESS;
 }
