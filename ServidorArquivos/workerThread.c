@@ -68,18 +68,19 @@ void processLs(Request *r) {
         strcat(buffer, buf);
     }
 
-//    if (buf == NULL) {
-//        char *typeRequest = "erro";
-//        strcpy(buffer, "Diretório/Arquivo não encontrado");
-//        CONN_send(r->connection, typeRequest, strlen(typeRequest), 0);
-//        CONN_send(r->connection, buffer, strlen(typeRequest), 0);
-//    } else {
+    //    if (buf == NULL) {
+    //        char *typeRequest = "erro";
+    //        strcpy(buffer, "Diretório/Arquivo não encontrado");
+    //        CONN_send(r->connection, typeRequest, strlen(typeRequest), 0);
+    //        CONN_send(r->connection, buffer, strlen(typeRequest), 0);
+    //    } else {
 
-        char typeRequest[2] = "ls";
-        CONN_send(r->connection, typeRequest, 2, 0);
+    char typeRequest[2] = "ls";
+    CONN_send(r->connection, typeRequest, 2, 0);
+    memset(typeRequest, '\0', sizeof(char)*2);
 
-        CONN_send(r->connection, buffer, BUFFER_SIZE, 0);
-    
+    CONN_send(r->connection, buffer, BUFFER_SIZE, 0);
+
 }
 
 void processWget(Request *r) {
@@ -94,23 +95,27 @@ void processWget(Request *r) {
         //        return -1;
     } else {
 
-        memset(buffer, (char) 0, sizeof (char)*BUFFER_SIZE);
+        char typeRequest[2] = "wg";
+        CONN_send(r->connection, typeRequest, 2, 0);
+        memset(typeRequest, '\0', sizeof(char)*2);
+
+        memset(buffer, '\0', sizeof (char)*BUFFER_SIZE);
         CONN_send(r->connection, getNameArquivo(r), BUFFER_SIZE, 0);
-        memset(buffer, (char) 0, sizeof (char)*BUFFER_SIZE);
+        memset(buffer, '\0', sizeof (char)*BUFFER_SIZE);
 
         c = fgetc(f);
         while (c != EOF) {
             strcat(buffer, &c);
             if (strlen(buffer) == 2048) {
                 CONN_send(r->connection, buffer, BUFFER_SIZE, 0);
-                memset(buffer, (char) 0, sizeof (char)*BUFFER_SIZE);
+                memset(buffer, (char) '\0', sizeof (char)*BUFFER_SIZE);
             }
         }
         if (strlen(buffer) >= 1) {
             CONN_send(r->connection, buffer, BUFFER_SIZE, 0);
         }
 
-        memset(buffer, (char) 0, sizeof (char)*BUFFER_SIZE);
+        memset(buffer, (char) '\0', sizeof (char)*BUFFER_SIZE);
 
         strcpy(buffer, "EOF");
         //        buffer = "EOF";

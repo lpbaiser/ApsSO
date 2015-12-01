@@ -15,16 +15,16 @@ void aguardaRequisicao(connection_t* connection){
     char buffer[BUFFER_SIZE];
 //    memset(buffer, 0, BUFFER_SIZE);
     
-    Request *request = (Request*) calloc(1, sizeof (Request));
     CONN_receive(connection, buffer, BUFFER_SIZE, 0);
 
+    Request *request = (Request*) calloc(1, sizeof (Request));
+    request = createRequest(connection, buffer);
+    addRequestList(request);
 
     if (!strcmp(buffer, "sair")) {
         return;
     }
 
-    request = createRequest(connection, buffer);
-    addRequestList(request);
 
 }
 
@@ -33,11 +33,11 @@ void* requestHandler(void* args) {
     connection_t* connection;
     connection = (connection_t*) args;
 
-    Request *stRequest = (Request*) malloc(sizeof (Request));
-    stRequest->connection = connection;
-    stRequest->path = "files/";
-    stRequest->typeRequest = 1;
-    addRequestList(stRequest);
+//    Request *stRequest = (Request*) malloc(sizeof (Request));
+//    stRequest->connection = connection;
+//    stRequest->path = "files/";
+//    stRequest->typeRequest = 1;
+//    addRequestList(stRequest);
 
     while (1) {
         aguardaRequisicao(connection);

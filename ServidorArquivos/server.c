@@ -61,7 +61,7 @@ int main(int argc, char** argv) {
 
     //Porta a ser usada pelo servidor... (use portas altas (10000+) para evitar conflitos com serviços já sendo executados)
     char* port;
-    int nThreads = 3;
+    int nThreads = 1;
 
     //Verficar se a porta foi passada como argumento
     if (argc < 2) {

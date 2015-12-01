@@ -18,7 +18,8 @@ int main(int argc, char** argv) {
 
     //Buffer usado para receber e enviar dados
     char buffer[BUFFER_SIZE];
-    char typeRequest[4];
+    char typeRequest[2];
+    memset(typeRequest, '\0', sizeof(char)*2);
 
     //Verificar se a porta e o host foi passado como argumento
     if (argc < 3) {
@@ -43,11 +44,13 @@ int main(int argc, char** argv) {
     CONN_receive(connection, buffer, 1024, 0);
     printf("%s\n", buffer);
 
-//    CONN_receive(connection, typeRequest, 2, 0);
-//    CONN_receive(connection, buffer, BUFFER_SIZE, 0);
-//    printf("%s\n", buffer);
+    //    CONN_receive(connection, typeRequest, 2, 0);
+    //    CONN_receive(connection, buffer, BUFFER_SIZE, 0);
+    //    printf("%s\n", buffer);
 
     while (1) {
+        memset(buffer, 0, BUFFER_SIZE);
+
         printf("Digite uma requisição: \n>>> ");
 
         //ler a mensagem a ser enviada ao servidor
@@ -63,12 +66,15 @@ int main(int argc, char** argv) {
         CONN_send(connection, buffer, strlen(buffer) + 1, 0);
 
         //aguardar o echo
-        CONN_receive(connection, typeRequest, BUFFER_SIZE, 0);
-        if (strcmp(typeRequest, "ls")) {
+        CONN_receive(connection, typeRequest, 2, 0);
+        if (!strcmp(typeRequest, "ls")) {
+            memset(buffer, 0, BUFFER_SIZE);
             CONN_receive(connection, buffer, BUFFER_SIZE, 0);
+            printf("Chegou request");
             printf("%s\n", buffer);
 
-        } else if (strcmp(typeRequest, "wget")) {
+        } else if (!strcmp(typeRequest, "wg")) {
+            memset(buffer, 0, BUFFER_SIZE);
             char nomeArquivo[BUFFER_SIZE];
             CONN_receive(connection, nomeArquivo, BUFFER_SIZE, 0);
 
@@ -87,11 +93,12 @@ int main(int argc, char** argv) {
 
             fclose(f);
             //guardar arquivo no diretório
-        } 
-//        else if (strcmp(typeRequest, "erro")) {
-//            CONN_receive(connection, buffer, BUFFER_SIZE, 0);
-//            printf("%s\n", buffer);
-//        }
+        }
+        memset(typeRequest, '\0', sizeof(char)*2);
+        //        else if (strcmp(typeRequest, "erro")) {
+        //            CONN_receive(connection, buffer, BUFFER_SIZE, 0);
+        //            printf("%s\n", buffer);
+        //        }
 
         //verificar se enviou um "sair". Caso afirmativo, terminar o cliente.
         if (!strcmp(buffer, "sair")) {
